@@ -238,30 +238,61 @@
   </div>
 
   <script>
-    const genderEL = document.getElementById('sex');
-    const ageEL = document.getElementById('age');
-    const heightEL = document.getElementById('height');
-    const weightEL = document.getElementById('weight');
-    const workHoursEL = document.getElementById('work');
-    const standEL = document.getElementById('stand');
-    const sitEL = document.getElementById('sit');
     function calculateCalories(e) {
       e.preventDefault();
-      const gender = genderEL.value;
-      const age = ageEL.value;
-      const height = heightEL.value;
-      const weight = weightEL.value;
-      const work = workHoursEL.value;
-      const stand = standEL.value;
-      const sit = sitEL.value;
-      console.log(
-        { gender },
-        { age },
-        { height },
-        { weight },
-        { work },
-        { stand },
-        { sit },)
+      var sex = document.getElementById("sex").value;
+      var age = document.getElementById("age").value;
+      var height = document.getElementById("height").value;
+      var weight = document.getElementById("weight").value;
+      var work = document.getElementById("work").value;
+      var stand = document.getElementById("stand").value;
+      var sit = document.getElementById("sit").value;
+      var sittingweek_hour = 0;
+      var standingweek_hour = 0;
+      var totalsittingweek = 0;
+      var totalstandingweek = 0;
+      var totalweek = 0;
+      var pie_perhoursitting = 0;
+      var pie_perhourstanding = 0;
+      var pie_perhoursitting1 = 0;
+      var pie_perhourstanding1 = 0;
+      var sittingweek_hour = (work * sit);
+      var standingweek_hour = (work * stand);
+      var totalsittingweek;
+      var totalstandingweek;
+      var totalsittingweek1;
+      var totalstandingweek1;
+      var totalweek;
+      var workweekday;
+      if (sex == 2) {
+        totalsittingweek1 = sittingweek_hour * ((1.2 * (655 + (4.35 * weight) + (4.7 * height) - (4.7 * age))) / 24);
+        totalstandingweek1 = standingweek_hour * ((2 * (655 + (4.35 * weight) + (4.7 * height) - (4.7 * age))) / 24);
+        totalsittingweek = Math.trunc(totalsittingweek1);
+        totalstandingweek = Math.trunc(totalstandingweek1);
+        totalweek = totalsittingweek + totalstandingweek;
+        pie_perhoursitting1 = (1.2 * (655 + (4.35 * weight) + (4.7 * height) - (4.7 * age))) / 24;
+        pie_perhourstanding1 = (2 * (655 + (4.35 * weight) + (4.7 * height) - (4.7 * age))) / 24;
+        pie_perhoursitting = Math.trunc(pie_perhoursitting1);
+        pie_perhourstanding = Math.trunc(pie_perhourstanding1);
+        workweekday = Math.trunc(totalweek / work);
+      } else {
+        totalsittingweek1 = sittingweek_hour * ((1.2 * (66 + (6.23 * weight) + (12.7 * height) - (6.8 * age))) / 24);
+        totalstandingweek1 = standingweek_hour * ((2 * (66 + (6.23 * weight) + (12.7 * height) - (6.8 * age))) / 24);
+        totalsittingweek = Math.trunc(totalsittingweek1);
+        totalstandingweek = Math.trunc(totalstandingweek1);
+        totalweek = totalsittingweek + totalstandingweek;
+        pie_perhoursitting1 = (1.2 * (66 + (6.23 * weight) + (12.7 * height) - (6.8 * age))) / 24;
+        pie_perhourstanding1 = (2 * (66 + (6.23 * weight) + (12.7 * height) - (6.8 * age))) / 24;
+        pie_perhoursitting = Math.trunc(pie_perhoursitting1);
+        pie_perhourstanding = Math.trunc(pie_perhourstanding1);
+        workweekday = Math.trunc(totalweek / work);
+      }
+      totalweek = String(totalweek).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+      workweekday = String(workweekday).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+      document.getElementById("sittinghourp").innerHTML = pie_perhoursitting;
+      document.getElementById("standinghourp").innerHTML = pie_perhourstanding;
+      document.getElementById("perworkweek").innerHTML = totalweek;
+      document.getElementById("perworkday").innerHTML = workweekday;
     }
   </script>
 </body>
